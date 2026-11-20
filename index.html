@@ -1,0 +1,79 @@
+<style>
+    .web {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 20px;
+        background: beige;
+    }
+
+    .welcome {
+        font-family: courier;
+        font-size: medium;
+        color: darkgreen;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .quote {
+        font-family: courier;
+        color: black;
+        font-size: large;
+        padding-left: 10px;
+    }
+
+    .bug-details {
+        font-family: arial;
+    }
+
+    .bug-tab,
+    .saved-tab {
+        color: black;
+        border: 1px solid black;
+        padding: 15px;
+        text-align: left;
+        background: white;
+        font-family: arial;
+    }
+
+    input {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        padding: 10px;
+        margin: 5px;
+        width: 550px;
+        font-family: courier;
+    }
+
+    button {
+        margin-left: auto;
+        margin-right: auto;
+        background: darkgreen;
+        color: white;
+        padding: 8px 15px;
+        font-family: arial;
+    }
+</style>
+
+<div class="web">
+    <div class="welcome">
+        <h1>WELCOME BACK, MINER!</h1>
+        <p class="quote">Let's work together to create a better world!</p>
+
+
+        <div class="bug-tab">
+            <p class="bug-details"><b>Enter details of a bug:</b></p>
+            <input placeholder="Name of the Game">
+            <input placeholder="Version">
+            <input placeholder="Android/PC/Mac">
+            <input placeholder="Single/Multiplayer/Online">
+            <input placeholder="Bug details">
+            <button onclick="document.getElementById('saveBug').innerHTML = ''">Save bug!</button>
+            <p id="saveBug"></p>
+        </div>
+
+        <div class="saved-tab">
+            <p><b>Saved bugs.</b></p>
+            <p>No bugs saved yet!</p>
+        </div>
+    </div>
