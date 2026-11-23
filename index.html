@@ -1,9 +1,12 @@
+<title>Minecraft Bug Tracker</title>
+
 <style>
     .web {
         max-width: 700px;
         margin: 0 auto;
+        width: 95%;
         padding: 20px;
-        background: beige;
+        background: rgb(247, 247, 230);
     }
 
     .welcome {
@@ -35,14 +38,14 @@
         font-family: arial;
     }
 
-    input {
-        margin-left: auto;
-        margin-right: auto;
+    input,
+    select {
         display: block;
+        box-sizing: border-box;
         padding: 10px;
-        margin: 5px;
-        width: 600px;
-        max-width: 500px;
+        margin: 5px 0;
+        width: 100%;
+        max-width: 100%;
         font-family: courier;
     }
 
@@ -64,17 +67,86 @@
 
         <div class="bug-tab">
             <p class="bug-details"><b>Enter details of a bug:</b></p>
-            <input placeholder="Name of the Game">
-            <input placeholder="Version">
-            <input placeholder="Android/PC/Mac">
-            <input placeholder="Single/Multiplayer/Online">
-            <input placeholder="Bug details">
-            <button onclick="document.getElementById('saveBug').innerHTML = ''">Save bug!</button>
+            <select id="gameInput">
+                <option value="">Name of game</option>
+                <option value="Minecraft">Minecraft</option>
+            </select>
+            <input id="versionInput" placeholder="Version">
+            <select id="deviceInput">
+                <option value="">Choose Device</option>
+                <option value="Android">Android</option>
+                <option value="PC">PC</option>
+                <option value="Mac">Mac</option>
+            </select>
+            <select id="modeInput">
+                <option value="">Choose Mode</option>
+                <option value="Single">Single</option>
+                <option value="Multiplayer">Multiplayer</option>
+                <option value="Online">Online</option>
+            </select>
+            <input id="detailsInput" placeholder="Bug details">
+            <button id="savedBugBtn" onclick="saveBug()">Save bug!</button>
             <p id="saveBug"></p>
         </div>
 
-        <div class="saved-tab">
-            <p><b>Saved bugs.</b></p>
-            <p>No bugs saved yet!</p>
+        <div class="saved-tab" id="savedTab">
+            <h3><b>Saved bugs.</b></h3>
+            <p id="noBugs">No bugs saved yet!</p>
+            <div id="savedBugsList"></div>
         </div>
     </div>
+
+    <script>
+
+        function saveBug() {
+            let game = document.getElementById('gameInput').value;
+            let version = document.getElementById('versionInput').value;
+            let device = document.getElementById('deviceInput').value;
+            let mode = document.getElementById('modeInput').value;
+            let details = document.getElementById('detailsInput').value;
+
+            if (game === "") {
+                alert("Please choose a Game!");
+                return;
+            }
+            if (device === "") {
+                alert("Please choose a Device!");
+                return;
+            }
+            if (mode === "") {
+                alert("Please choose a Mode!");
+                return;
+            }
+            if (version === "") {
+                alert("Please enter a Version!");
+                return;
+            }
+            if (details === "") {
+                alert("Please enter Details!")
+            }
+            if (!version.includes(".")) {
+                alert("Please enter a valid version like 1.21");
+                return;
+            }
+            if (details.length < 10) {
+                alert("Please describe the bug in at least 10 characters. e.g No beds in village houses.");
+                return;
+            }
+
+
+            document.getElementById('noBugs').style.display = "none";
+
+            let newBug = document.createElement('div');
+            newBug.style.border = "1px solid black";
+            newBug.style.padding = "10px";
+            newBug.style.marginTop = "10px";
+            newBug.innerHTML = "<b>Game:</b> " + game + "<br><b>Version:</b> " + version + "<br><b>Device:</b> " + device + "<br><b>Mode:</b> " + mode + "<br><b>Details:</b> " + details;
+            document.getElementById('savedBugsList').appendChild(newBug);
+
+            document.getElementById('gameInput').value = "";
+            document.getElementById('versionInput').value = "";
+            document.getElementById('deviceInput').value = "";
+            document.getElementById('modeInput').value = "";
+            document.getElementById('detailsInput').value = "";
+        }
+    </script>
